@@ -1,8 +1,10 @@
 import React from 'react'
 import ProductRow from './ProductRow '
 
-function ProductTable({products}) {
-    {console.log("ProductTable", products)}
+function ProductTable({products, searchQuery}) {
+    
+
+    {console.log("searchQuery", searchQuery)}
 
   return (
     <div>
@@ -17,7 +19,15 @@ function ProductTable({products}) {
             </tr>
             </thead>
             <tbody>
-            {products.map(product => <ProductRow key={product.id} product={product}/>)}
+            {
+            products.filter(product => {
+                if(searchQuery ===""){
+                    return product
+                  }
+                if(product.name.toLowerCase().includes(searchQuery.toLowerCase())){
+                    return product
+                }
+            }).map(product => <ProductRow key={product.id} product={product}/>)}
 
             </tbody>
 

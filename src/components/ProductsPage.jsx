@@ -6,15 +6,14 @@ import SearchBar from './SearchBar';
 import ProductTable from './ProductTable';
 
 function ProductsPage() {
-
+    const [searchQuery, setSearchQuery] = useState('')
     const [products, setProducts] = useState(data);
-  {console.log("ProductsPage", products)}
-
+  
   return (
     <div>
         <h1>IronStore</h1>
-        <SearchBar />
-        <ProductTable products={products} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+        <ProductTable products={products} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </div>
   )
 }
