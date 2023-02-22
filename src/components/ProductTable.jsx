@@ -1,10 +1,10 @@
 import React from 'react'
 import ProductRow from './ProductRow '
 
-function ProductTable({products, searchQuery}) {
+function ProductTable({products, searchQuery, inStockChecked}) {
     
 
-    {console.log("searchQuery", searchQuery)}
+    //{console.log("searchQuery", searchQuery)}
 
   return (
     <div>
@@ -19,15 +19,24 @@ function ProductTable({products, searchQuery}) {
             </tr>
             </thead>
             <tbody>
+
+            {/* {inStockChecked === true ? "hi" : ""} */}
             {
             products.filter(product => {
+                if(inStockChecked === true){
+                    if(product.inStock === true){
+                       console.log("IN STOCK IS CHECKED!")
+                    return product
+                   }
+                }
                 if(searchQuery ===""){
                     return product
                   }
                 if(product.name.toLowerCase().includes(searchQuery.toLowerCase())){
                     return product
                 }
-            }).map(product => <ProductRow key={product.id} product={product}/>)}
+            }).map(product => <ProductRow key={product.id} product={product}/>)
+            }
 
             </tbody>
 
