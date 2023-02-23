@@ -23,19 +23,26 @@ function ProductTable({products, searchQuery, inStockChecked}) {
             {/* {inStockChecked === true ? "hi" : ""} */}
             {
             products.filter(product => {
-                if(inStockChecked === true){
-                    if(product.inStock === true){
-                       console.log("IN STOCK IS CHECKED!")
-                    return product
-                   }
-                }
                 if(searchQuery ===""){
                     return product
                   }
                 if(product.name.toLowerCase().includes(searchQuery.toLowerCase())){
                     return product
                 }
-            }).map(product => <ProductRow key={product.id} product={product}/>)
+            }).filter(product =>{
+                if(inStockChecked === true){
+                    if(product.inStock === true){
+                       console.log("IN STOCK IS CHECKED!")
+                    return product
+                   }
+                }
+                if(inStockChecked === false){
+                    if(product.inStock === true || product.inStock === false){
+                    return product
+                   }
+                }
+            })
+            .map(product => <ProductRow key={product.id} product={product}/>)
             }
 
             </tbody>
